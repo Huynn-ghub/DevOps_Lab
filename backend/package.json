@@ -1,0 +1,23 @@
+{
+  "name": "todo-backend",
+  "version": "1.0.0",
+  "description": "Todo App Backend - DevOps Mini Project",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "keywords": [],
+  "author": "Đồng Thanh Huyền",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "express-validator": "^7.3.1",
+    "mongoose": "^8.23.0"
+  }
+}
