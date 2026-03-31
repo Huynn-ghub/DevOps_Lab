@@ -1,16 +1,41 @@
-# React + Vite
+# Frontend – TodoApp
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React + Vite + TailwindCSS – Kanban Task Manager UI.
 
-Currently, two official plugins are available:
+## Cài đặt & chạy
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```bash
+npm install
+npm run dev   # http://localhost:5173
+```
 
-## React Compiler
+## Biến môi trường (.env)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```
+VITE_API_URL=http://localhost:5000/api
+```
 
-## Expanding the ESLint configuration
+## Trang
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+| Route | Mô tả |
+|:---|:---|
+| `/` | Kanban Board (Drag & Drop, Pomodoro, Gamification) |
+| `/analytics` | Biểu đồ thống kê theo Priority và Status |
+| `/about` | Thông tin sinh viên |
+
+## Cấu trúc
+
+```
+src/
+├── api/           # Gọi API backend
+├── components/    # Navbar
+├── pages/         # Home, Analytics, About
+├── App.jsx        # Router + Dark mode
+└── main.jsx
+```
+
+## Build production
+
+```bash
+npm run build   # Output: dist/
+```
