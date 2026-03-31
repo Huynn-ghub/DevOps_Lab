@@ -145,20 +145,17 @@ export default function Home() {
     const { source, destination, draggableId } = result;
     if (source.droppableId === destination.droppableId && source.index === destination.index) return;
 
+    // Task đã done → không cho kéo đi đâu
+    if (source.droppableId === 'done') return;
+
     const newStatus = destination.droppableId;
     const movedTodo = todos.find((t) => t.id === draggableId);
 
-    if (newStatus === 'done' && source.droppableId !== 'done') {
+    if (newStatus === 'done') {
       confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: ['#22c55e', '#18181b', '#f59e0b'] });
       const expGain = movedTodo?.priority === 'low' ? 10 : movedTodo?.priority === 'medium' ? 20 : 30;
       setStats((prev) => {
         const newExp = prev.exp + expGain;
-        return { ...prev, exp: newExp, level: Math.floor(newExp / 100) + 1 };
-      });
-    } else if (source.droppableId === 'done' && newStatus !== 'done') {
-      const expLoss = movedTodo?.priority === 'low' ? 10 : movedTodo?.priority === 'medium' ? 20 : 30;
-      setStats((prev) => {
-        const newExp = Math.max(0, prev.exp - expLoss);
         return { ...prev, exp: newExp, level: Math.floor(newExp / 100) + 1 };
       });
     }
