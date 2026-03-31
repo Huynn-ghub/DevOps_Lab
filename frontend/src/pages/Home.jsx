@@ -198,43 +198,43 @@ export default function Home() {
   const currentLevelExp = stats.exp % 100;
 
   return (
-    <div className="container mx-auto max-w-6xl px-4 py-10">
+    <div className="container mx-auto max-w-6xl px-4 py-10 transition-colors duration-300">
       {/* Header + Stats */}
       <div className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight text-gray-900">Kanban Board</h1>
-          <p className="text-gray-500 mt-1 text-sm">Drag and drop tasks to organize your workflow.</p>
+          <h1 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100">Kanban Board</h1>
+          <p className="text-gray-500 dark:text-gray-400 mt-1 text-sm">Drag and drop tasks to organize your workflow.</p>
         </div>
 
         {/* Gamification */}
-        <div className="flex items-center gap-5 rounded-xl border border-gray-200 bg-white px-5 py-3 shadow-sm">
+        <div className="flex items-center gap-5 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 px-5 py-3 shadow-sm">
           <div className="flex items-center gap-3">
             <div className="flex h-9 w-9 items-center justify-center rounded-full bg-yellow-500/10 text-yellow-500">
               <Trophy className="h-4 w-4" />
             </div>
             <div>
-              <p className="text-xs font-medium text-gray-500 uppercase tracking-wider">Level {stats.level}</p>
+              <p className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Level {stats.level}</p>
               <div className="mt-1 flex items-center gap-2">
-                <div className="h-1.5 w-24 overflow-hidden rounded-full bg-gray-200">
+                <div className="h-1.5 w-24 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700">
                   <div
                     className="h-full bg-yellow-500 transition-all duration-500"
                     style={{ width: `${currentLevelExp}%` }}
                   />
                 </div>
-                <span className="text-xs font-bold text-gray-700">{currentLevelExp}/100</span>
+                <span className="text-xs font-bold text-gray-700 dark:text-gray-300">{currentLevelExp}/100</span>
               </div>
             </div>
           </div>
 
-          <div className="h-7 w-px bg-gray-200" />
+          <div className="h-7 w-px bg-gray-200 dark:bg-gray-700" />
 
           <div className="flex items-center gap-2">
             <div className="flex h-8 w-8 items-center justify-center rounded-full bg-orange-500/10 text-orange-500">
               <Flame className="h-4 w-4" />
             </div>
             <div>
-              <p className="text-xs text-gray-500 uppercase tracking-wider">Streak</p>
-              <p className="text-sm font-bold text-gray-800">{stats.streak} Days</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider">Streak</p>
+              <p className="text-sm font-bold text-gray-800 dark:text-gray-200">{stats.streak} Days</p>
             </div>
           </div>
         </div>
@@ -248,15 +248,15 @@ export default function Home() {
           value={newTask}
           onChange={(e) => setNewTask(e.target.value)}
           placeholder="What needs to be done?"
-          className="flex-1 rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder-gray-400
-                     ring-offset-white focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 transition"
+          className="flex-1 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 px-4 py-3 text-sm text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500
+                     ring-offset-white dark:ring-offset-gray-950 focus:outline-none focus:ring-2 focus:ring-gray-900 dark:focus:ring-gray-100 focus:ring-offset-2 transition"
         />
         <div className="flex gap-3">
           <select
             value={priority}
             onChange={(e) => setPriority(e.target.value)}
-            className="rounded-lg border border-gray-200 bg-white px-3 py-3 text-sm text-gray-700
-                       focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 transition cursor-pointer"
+            className="rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 px-3 py-3 text-sm text-gray-700 dark:text-gray-300
+                       focus:outline-none focus:ring-2 focus:ring-gray-900 dark:focus:ring-gray-100 focus:ring-offset-2 transition cursor-pointer"
           >
             <option value="low">Low Priority</option>
             <option value="medium">Medium Priority</option>
@@ -285,10 +285,10 @@ export default function Home() {
             {columns.map((col) => {
               const colTodos = todos.filter((t) => t.status === col.id);
               return (
-                <div key={col.id} className={`flex flex-col rounded-xl border p-4 ${col.color}`}>
+                <div key={col.id} className={`flex flex-col rounded-xl border p-4 ${col.color} dark:bg-gray-900/50 dark:border-gray-700`}>
                   <div className="mb-4 flex items-center justify-between">
-                    <h3 className="font-semibold text-gray-700">{col.title}</h3>
-                    <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white text-xs font-medium text-gray-500 shadow-sm">
+                    <h3 className="font-semibold text-gray-700 dark:text-gray-300">{col.title}</h3>
+                    <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white dark:bg-gray-800 text-xs font-medium text-gray-500 dark:text-gray-400 shadow-sm">
                       {colTodos.length}
                     </span>
                   </div>
@@ -308,8 +308,8 @@ export default function Home() {
                                 <div
                                   ref={provided.innerRef}
                                   {...provided.draggableProps}
-                                  className={`group relative flex flex-col gap-3 rounded-lg border border-gray-200 bg-white p-4 shadow-sm transition-all
-                                    ${snapshot.isDragging ? 'rotate-1 scale-105 shadow-xl ring-2 ring-gray-900/20' : ''}
+                                  className={`group relative flex flex-col gap-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 shadow-sm transition-all
+                                    ${snapshot.isDragging ? 'rotate-1 scale-105 shadow-xl ring-2 ring-gray-900/20 dark:ring-white/20' : ''}
                                     ${todo.status === 'done' ? 'opacity-75' : ''}`}
                                 >
                                   <div className="flex items-start gap-3">
@@ -321,7 +321,7 @@ export default function Home() {
                                     </div>
                                     <span
                                       className={`flex-1 text-sm font-medium ${
-                                        todo.status === 'done' ? 'line-through text-gray-400' : 'text-gray-800'
+                                        todo.status === 'done' ? 'line-through text-gray-400 dark:text-gray-600' : 'text-gray-800 dark:text-gray-200'
                                       }`}
                                     >
                                       {todo.text}
@@ -383,8 +383,8 @@ export default function Home() {
             initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 100, opacity: 0 }}
-            className="fixed bottom-6 inset-x-0 mx-auto w-fit z-50 flex items-center gap-6 rounded-2xl border border-gray-200
-                       bg-white/95 px-6 py-4 shadow-2xl backdrop-blur-md"
+            className="fixed bottom-6 inset-x-0 mx-auto w-fit z-50 flex items-center gap-6 rounded-2xl border border-gray-200 dark:border-gray-700
+                       bg-white/95 dark:bg-gray-900/95 px-6 py-4 shadow-2xl backdrop-blur-md"
           >
             {isTimerFinished ? (
               <div className="flex flex-col items-center gap-3 px-2">
@@ -410,14 +410,14 @@ export default function Home() {
             ) : (
               <>
                 <div className="flex flex-col">
-                  <span className="text-xs font-semibold uppercase tracking-wider text-gray-500">Pomodoro Focus</span>
-                  <span className="max-w-[180px] truncate text-sm font-medium text-gray-900">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">Pomodoro Focus</span>
+                  <span className="max-w-[180px] truncate text-sm font-medium text-gray-900 dark:text-gray-100">
                     {todos.find((t) => t.id === activePomodoro)?.text}
                   </span>
                 </div>
 
                 <div className="flex flex-col items-center gap-1">
-                  <div className="text-4xl font-bold font-mono text-gray-900">{formatTime(timeLeft)}</div>
+                  <div className="text-4xl font-bold font-mono text-gray-900 dark:text-gray-100">{formatTime(timeLeft)}</div>
                   {!isTimerRunning && timeLeft === selectedDuration * 60 && (
                     <div className="flex gap-1">
                       {[15, 25, 50].map((mins) => (

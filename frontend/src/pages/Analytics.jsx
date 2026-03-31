@@ -32,7 +32,7 @@ export default function Analytics() {
   if (loading) {
     return (
       <div className="flex justify-center py-20">
-        <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-900 border-t-transparent" />
+        <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-900 dark:border-gray-100 border-t-transparent" />
       </div>
     );
   }
@@ -55,24 +55,24 @@ export default function Analytics() {
   ];
 
   const summaryCards = [
-    { label: 'Total Tasks', value: totalTasks, Icon: ListTodo, color: 'text-blue-500 bg-blue-50' },
-    { label: 'Completed', value: completedTasks, Icon: CheckCircle2, color: 'text-green-500 bg-green-50' },
-    { label: 'In Progress', value: inProgressTasks, Icon: Clock, color: 'text-yellow-500 bg-yellow-50' },
-    { label: 'Completion Rate', value: `${completionRate}%`, Icon: TrendingUp, color: 'text-purple-500 bg-purple-50' },
+    { label: 'Total Tasks', value: totalTasks, Icon: ListTodo, color: 'text-blue-500 bg-blue-50 dark:bg-blue-950' },
+    { label: 'Completed', value: completedTasks, Icon: CheckCircle2, color: 'text-green-500 bg-green-50 dark:bg-green-950' },
+    { label: 'In Progress', value: inProgressTasks, Icon: Clock, color: 'text-yellow-500 bg-yellow-50 dark:bg-yellow-950' },
+    { label: 'Completion Rate', value: `${completionRate}%`, Icon: TrendingUp, color: 'text-purple-500 bg-purple-50 dark:bg-purple-950' },
   ];
 
   const tooltipStyle = {
-    backgroundColor: '#ffffff',
-    borderColor: '#e4e4e7',
+    backgroundColor: 'var(--tooltip-bg, #ffffff)',
+    borderColor: 'var(--tooltip-border, #e4e4e7)',
     borderRadius: '8px',
-    color: '#09090b',
+    color: 'var(--tooltip-color, #09090b)',
   };
 
   return (
     <div className="container mx-auto max-w-5xl px-4 py-10">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold tracking-tight text-gray-900">Analytics</h1>
-        <p className="text-gray-500 mt-1 text-sm">Track your productivity and task distribution.</p>
+        <h1 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100">Analytics</h1>
+        <p className="text-gray-500 dark:text-gray-400 mt-1 text-sm">Track your productivity and task distribution.</p>
       </div>
 
       {/* Summary Cards */}
@@ -83,15 +83,15 @@ export default function Analytics() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.1 }}
-            className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm"
+            className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 p-5 shadow-sm"
           >
             <div className="flex items-center gap-4">
               <div className={`rounded-full p-3 ${color}`}>
                 <Icon className="h-5 w-5" />
               </div>
               <div>
-                <p className="text-xs font-medium text-gray-500">{label}</p>
-                <h3 className="text-2xl font-bold text-gray-900">{value}</h3>
+                <p className="text-xs font-medium text-gray-500 dark:text-gray-400">{label}</p>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100">{value}</h3>
               </div>
             </div>
           </motion.div>
@@ -105,9 +105,9 @@ export default function Analytics() {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.4 }}
-          className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm"
+          className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 p-6 shadow-sm"
         >
-          <h3 className="mb-6 text-base font-semibold text-gray-900">Tasks by Priority</h3>
+          <h3 className="mb-6 text-base font-semibold text-gray-900 dark:text-gray-100">Tasks by Priority</h3>
           <div className="h-[280px]">
             {priorityData.length > 0 ? (
               <ResponsiveContainer width="100%" height="100%">
@@ -127,7 +127,7 @@ export default function Analytics() {
                 </PieChart>
               </ResponsiveContainer>
             ) : (
-              <div className="flex h-full items-center justify-center text-gray-400">No data available</div>
+              <div className="flex h-full items-center justify-center text-gray-400 dark:text-gray-600">No data available</div>
             )}
           </div>
         </motion.div>
@@ -137,16 +137,16 @@ export default function Analytics() {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.5 }}
-          className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm"
+          className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 p-6 shadow-sm"
         >
-          <h3 className="mb-6 text-base font-semibold text-gray-900">Tasks by Status</h3>
+          <h3 className="mb-6 text-base font-semibold text-gray-900 dark:text-gray-100">Tasks by Status</h3>
           <div className="h-[280px]">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={statusData} margin={{ top: 10, right: 10, left: -20, bottom: 5 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e4e4e7" vertical={false} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#374151" vertical={false} />
                 <XAxis dataKey="name" stroke="#71717a" fontSize={12} tickLine={false} axisLine={false} />
                 <YAxis stroke="#71717a" fontSize={12} tickLine={false} axisLine={false} allowDecimals={false} />
-                <Tooltip contentStyle={tooltipStyle} cursor={{ fill: '#f4f4f5', opacity: 0.8 }} />
+                <Tooltip contentStyle={tooltipStyle} cursor={{ fill: '#f4f4f5', opacity: 0.1 }} />
                 <Bar dataKey="count" radius={[4, 4, 0, 0]}>
                   {statusData.map((entry, i) => (
                     <Cell key={i} fill={entry.fill} />
