@@ -113,7 +113,8 @@ export default function Home() {
   };
 
   const updateStatus = async (id, status) => {
-    const prev = todos.find((t) => t.id === id);
+    const prevTodo = todos.find((t) => t.id === id);
+    // Optimistic update
     setTodos((prevList) => prevList.map((t) => (t.id === id ? { ...t, status } : t)));
     try {
       const res = await fetch(`${API_URL}/todos/${id}`, {
@@ -123,10 +124,19 @@ export default function Home() {
       });
       if (res.ok) {
         const data = await res.json();
+        // Backend trả về { todo: {...}, stats: {...} }
+        if (data.todo) {
+          setTodos((prevList) => prevList.map((t) => (t.id === id ? data.todo : t)));
+        }
         if (data.stats) setStats(data.stats);
+      } else {
+        // Rollback nếu API lỗi
+        setTodos((prevList) => prevList.map((t) => (t.id === id ? prevTodo : t)));
       }
     } catch (e) {
-      setTodos((prevList) => prevList.map((t) => (t.id === id ? prev : t)));
+      // Rollback nếu network lỗi
+      setTodos((prevList) => prevList.map((t) => (t.id === id ? prevTodo : t)));
+      console.error('Update status failed:', e);
     }
   };
 
